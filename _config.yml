@@ -1,6 +1,6 @@
 # Site wide configuration
 
-title: My Blog
+title: Fz's Blog
 locale: en_US
 description: Blog on programming, machine learning and tech stuff
 logo: site-logo.png
@@ -44,7 +44,7 @@ owner:
   facebook: feroz29
   github: fz-29
 # stackexchange: #http://stackoverflow.com/users/123456/username
-  linkedin: feroz29
+  linkedin: a29feroz
   instagram: #username
   flickr: #username
   tumblr: #username
@@ -61,3 +61,6 @@ owner:
 #comments
 layout: default
 comments: true
+
+#syntax heighlighting
+pygments: true
