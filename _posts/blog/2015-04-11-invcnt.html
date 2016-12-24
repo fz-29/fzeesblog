@@ -26,69 +26,72 @@ author:
   first_name: ''
   last_name: ''
 ---
-<p>In the Question <a href="http://www.spoj.com/problems/INVCNT/">Inversion Count</a> - INVCNT on spoj, you need to print the no. of inversion pairs. The question defines it as - "Let A[0...n - 1] be an array of n distinct positive integers. If i &lt; j and A[i] &gt; A[j] then the pair (i, j) is called an inversion of A." So basically an inversion pair is the one in which if indices and the values have invert relation. ( if one is &gt; the other is &lt; ).</p>
-<p>The first basic approach which comes to mind is simple Brute Force algo. That is selecting one element(let it be i th) in the array and then checking all the elements ( j index for that matter) after the selected element for the condition Arr[i]&gt;Arr[j], if such pair occurs then count++. But time complexity of this approach is O(n<sup>2</sup>).</p>
-<p>But submitting this solution will lead to TLE (time limit exceeded).</p>
-<p>So we need to use some other algo, and the solution uses Merge Function in Merge Sort Algorithm.</p>
-<p>Actually when we merge the two sorted array, while comparing elements we can perform the counting of inversion pairs. This can be done as : (for ascending order sorting) When the current element under consideration in right sub-array is smaller than current element under consideration in left sub-array the no of inversion pairs equals to the no. of all the elements after the current element in left sub-array (including itself), in each level of merge sort. Sum of all these pairs will be equal to inversion pairs.</p>
-<p>This can be understood using following :</p>
-<p><a href="https://fzeesblog.files.wordpress.com/2015/04/img_20150411_231458239_hdr.jpg"><img class="alignnone size-medium wp-image-48" src="{{ site.baseurl }}/assets/img_20150411_231458239_hdr.jpg?w=262" alt="IMG_20150411_231458239_HDR" width="655px" height="750px" /></a></p>
-<p>Here is the following pseudo-code :</p>
-<p>[code language="cpp"]<br />
-#include &lt;iostream&gt;<br />
-typedef long long int typex;<br />
-using namespace std;<br />
-long long int count,arr[200001];<br />
-void merge(typex p,typex q,typex r)<br />
-{</p>
-<p>	//first array has indices from p to q<br />
-	//second array has indices from q to p<br />
-    typex i,li,ri,n1,n2;<br />
-    n1=q-p+1;<br />
-    n2=r-q;<br />
-    typex *lt= new typex [n1];<br />
-    typex *rt= new typex [n2];//[q-(r+1)+1]<br />
-    // HERE copy both the arrays in the newly dynamically allocated array.<br />
-    //left and right array is ready which is all ready sorted<br />
-    //now we will merge<br />
-    //indices fr left copy and right copy respectively<br />
-    li=ri=0;<br />
-    i=p;//index for array being sorted<br />
-    while(li&lt;n1 &amp;&amp; ri&lt;n2)<br />
-    {<br />
-        if(lt[li]&gt;rt[ri])<br />
-        {<br />
-            arr[i++]=rt[ri++];<br />
-            count=count+n1-li;// MAIN STEP<br />
-        }<br />
-         else //right hand side elemnt is greater that is inversion pair<br />
-        {<br />
-            arr[i++]=lt[li++];<br />
-        }<br />
-    }<br />
-//inversion pairs have been counted till this stage, do not count again;<br />
-    while(li&lt;n1)<br />
-        arr[i++]=lt[li++];<br />
-    while(ri&lt;n2)<br />
-        arr[i++]=rt[ri++];<br />
-}<br />
-void mergesort(typex p,typex r)<br />
-{<br />
-    if(p&lt;r)<br />
-    {<br />
-        typex q=(p+r)/2;<br />
-        mergesort(p,q);<br />
-        mergesort(q+1,r);<br />
-        merge(p,q,r);<br />
-    }<br />
-}<br />
-int main()<br />
-{<br />
-   ////Write code accordingly<br />
-        count=0;<br />
-        mergesort(0,n-1);<br />
-        cout&amp;lt;&amp;lt;&quot;\n&quot;&amp;lt;&amp;lt;count;<br />
-	////</p>
-<p>}</p>
-<p>[/code]</p>
-<p>Complete Solution : https://ideone.com/UBCpT9</p>
+
+In the Question <a href="http://www.spoj.com/problems/INVCNT/">Inversion Count</a> - INVCNT on spoj, you need to print the no. of inversion pairs. The question defines it as - "Let A[0...n - 1] be an array of n distinct positive integers. If i < j and A[i] >  A[j] then the pair (i, j) is called an inversion of A." So basically an inversion pair is the one in which if indices and the values have invert relation. ( if one is >  the other is < ).
+The first basic approach which comes to mind is simple Brute Force algo. That is selecting one element(let it be i th) in the array and then checking all the elements ( j index for that matter) after the selected element for the condition Arr[i]> Arr[j], if such pair occurs then count++. But time complexity of this approach is O(n<sup>2</sup>).
+But submitting this solution will lead to TLE (time limit exceeded).
+So we need to use some other algo, and the solution uses Merge Function in Merge Sort Algorithm.
+Actually when we merge the two sorted array, while comparing elements we can perform the counting of inversion pairs. This can be done as : (for ascending order sorting) When the current element under consideration in right sub-array is smaller than current element under consideration in left sub-array the no of inversion pairs equals to the no. of all the elements after the current element in left sub-array (including itself), in each level of merge sort. Sum of all these pairs will be equal to inversion pairs.
+This can be understood using following :
+<a href="https://fzeesblog.files.wordpress.com/2015/04/img_20150411_231458239_hdr.jpg"><img class="alignnone size-medium wp-image-48" src="{{ site.baseurl }}/assets/img_20150411_231458239_hdr.jpg?w=262" alt="IMG_20150411_231458239_HDR" width="655px" height="750px" /></a>
+Here is the following pseudo-code :
+
+{% highlight cpp %}
+
+#include <iostream> 
+typedef long long int typex;
+using namespace std;
+long long int count,arr[200001];
+void merge(typex p,typex q,typex r)
+{
+	//first array has indices from p to q
+	//second array has indices from q to p
+    typex i,li,ri,n1,n2;
+    n1=q-p+1;
+    n2=r-q;
+    typex *lt= new typex [n1];
+    typex *rt= new typex [n2];//[q-(r+1)+1]
+    // HERE copy both the arrays in the newly dynamically allocated array.
+    //left and right array is ready which is all ready sorted
+    //now we will merge
+    //indices fr left copy and right copy respectively
+    li=ri=0;
+    i=p;//index for array being sorted
+    while(li< n1 && ri< n2)
+    {
+        if(lt[li]> rt[ri])
+        {
+            arr[i++]=rt[ri++];
+            count=count+n1-li;// MAIN STEP
+        }
+         else //right hand side elemnt is greater that is inversion pair
+        {
+            arr[i++]=lt[li++];
+        }
+    }
+//inversion pairs have been counted till this stage, do not count again;
+    while(li<n1)
+        arr[i++]=lt[li++];
+    while(ri<n2)
+        arr[i++]=rt[ri++];
+}
+void mergesort(typex p,typex r)
+{
+    if(p<r)
+    {
+        typex q=(p+r)/2;
+        mergesort(p,q);
+        mergesort(q+1,r);
+    }
+}
+int main()
+{
+   ////Write code accordingly
+        count=0;
+        mergesort(0,n-1);
+        cout<<&quot;\n&quot;<<count;
+	////
+}
+{% endhighlight %}
+
+Complete Solution : https://ideone.com/UBCpT9
