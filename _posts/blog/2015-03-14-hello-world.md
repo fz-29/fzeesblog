@@ -5,7 +5,7 @@ date: 2015-03-14 19:10:36.000000000 +05:30
 type: post
 published: true
 status: publish
-categories: []
+categories: blog
 tags: []
 meta:
   geo_latitude: '28.6139391'
