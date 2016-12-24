@@ -24,7 +24,23 @@
     </div><!-- /.entry-wrapper -->
   </article>
 </div><!-- /#main -->
-
+{% if page.comments %}
+  <div id="disqus_thread"></div>
+  <script>  
+  var disqus_config = function () {
+  var disqus_shortname = 'fzeesblog';
+  this.page.url = {{ page.url }};  // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = "{{ page.url }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  (function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = '//fz29.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{% endif %}
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     {% include footer.html %}
@@ -32,6 +48,9 @@
 </div><!-- /.footer-wrapper -->
 
 {% include scripts.html %}
+{% if page.comments %}
+<script id="dsq-count-scr" src="//fz29.disqus.com/count.js" async></script>
+{% endif %}
 
 </body>
 </html>

@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title: Site Title
+title: My Blog
 locale: en_US
-description: Describe your website here.
+description: Blog on programming, machine learning and tech stuff
 logo: site-logo.png
 search: true
 url: http://blog.ferozahmad.com
@@ -39,7 +39,7 @@ owner:
   name: Feroz Ahmad
   avatar: bio-photo.jpg
   email: a29feroz@gmail.com
-  disqus-shortname:
+  disqus-shortname: fz29
   twitter: __fz29__
   facebook: feroz29
   github: fz-29
