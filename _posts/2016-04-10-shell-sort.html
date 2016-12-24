@@ -1,0 +1,56 @@
+---
+layout: post
+title: Shell Sort
+date: 2016-04-10 15:09:26.000000000 +05:30
+type: post
+published: true
+status: publish
+categories:
+- Algorithms
+tags: []
+meta:
+  _edit_last: '82754425'
+  geo_public: '0'
+  _publicize_job_id: '21646616298'
+author:
+  login: feroz29
+  email: f29ahmad@gmail.com
+  display_name: feroz29
+  first_name: ''
+  last_name: ''
+---
+<p>There are many implementations of this sort available,  but in this article I have taken O(n2) implementation.</p>
+<p>It is a modified insertion sort such that we are maintaining of the "sorted part" of the insert sort algo, at discrete gaps rather than being contiguous as in normal insertion sort.</p>
+<p>Other modified versions : <a href="https://en.wikipedia.org/wiki/Shellsort#Gap_sequences">WIKI</a></p>
+<p>[code]<br />
+#include &lt;stdio.h&gt;<br />
+#include &lt;stdlib.h&gt;<br />
+void shell_sort(int arr[], int n)<br />
+{<br />
+    int gap,i,j;<br />
+    //we change the gap/ shell size from n/2,n/4......1<br />
+    for(gap=n/2;gap&gt;0;gap/=2) //ranges gap = n/2 ---&gt;1<br />
+    {<br />
+        //we perform something similar to insertion sort but rather than taking elements which are adjacent<br />
+        //in memory locations we take them at certain &quot;gap&quot; (also the variable name used in code is as same)<br />
+        for(i=gap;i&lt;n;i++) //for all elements using the shell length { int temp=arr[i]; for(j=i;j&gt;=gap &amp;&amp; arr[j-gap]&gt;temp;j=j-gap) //the insertion step, we jump at elements before i, but by a leap = gap<br />
+            {<br />
+                arr[j]=arr[j-gap];<br />
+            }<br />
+            arr[j]=temp;<br />
+        }<br />
+    }<br />
+}</p>
+<p>int main()<br />
+{<br />
+    printf(&quot;Enter the array : \n&quot;);<br />
+    int n, a[]={5,6,8,9,8,7,6,8,4,6,2,1,6};<br />
+    n=sizeof(a)/sizeof(int);<br />
+    shell_sort(a,n);<br />
+    for(int i=0;i&lt;n;i++)<br />
+    {<br />
+        printf(&quot; %d &quot;, a[i]);<br />
+    }</p>
+<p>    return 0;<br />
+}</p>
+<p>[/code]</p>

@@ -1,0 +1,38 @@
+---
+layout: post
+title: P, NP, NP-complete and NP-Hard ?
+date: 
+type: post
+published: false
+status: draft
+categories: []
+tags: []
+meta:
+  _edit_last: '82754425'
+  geo_public: '0'
+author:
+  login: feroz29
+  email: f29ahmad@gmail.com
+  display_name: feroz29
+  first_name: ''
+  last_name: ''
+---
+<p>In abstract sense, they are classes of decision problems having certain characteristics regarding their run time complexities.<br />
+**Decision problem: A problem with a yes or no answer.</p>
+<h1>P</h1>
+<p><em>P is a complexity class that represents the set of all decision problems that can be SOLVED in polynomial time</em>. That is, given an instance of the problem, the answer yes or no can be decided in polynomial time.</p>
+<h1>NP</h1>
+<p><em>NP is a complexity class that represents the set of all decision problems for which the instances where the answer is "yes" have proofs that can be VERIFIED in polynomial time.</em></p>
+<p>Some people think P = NP, which means any problem that can be verified in polynomial time can also be solved in polynomial time and vice versa.  If they could prove this, it would revolutionize computer science because people would be able to construct faster algorithms for a lot of important problems.</p>
+<h1>NP-hard</h1>
+<p>Intuitively, these are the problems that are <em>at least as hard as the NP-complete problems</em>. NP-hard problems <em>do not have to be in NP</em>, and <em>they do not have to be decision problems</em>.</p>
+<p>The precise definition here is that <em>a problem <code>X</code> is NP-hard, if there is an NP-complete problem <code>Y</code>, such that <code>Y</code> is reducible to <code>X</code> in polynomial time</em>.</p>
+<h1>NP-Complete</h1>
+<p><em>NP-Complete is a complexity class which represents the set of all problems <code>X</code> in NP for which it is possible to reduce any other NP problem <code>Y</code> to <code>X</code> in polynomial time.</em></p>
+<p>Intuitively this means that we can solve <code>Y</code> quickly if we know how to solve <code>X</code> quickly. Precisely, <code>Y</code> is reducible to <code>X</code>, if there is a polynomial time algorithm <code>f</code> to transform instances <code>y</code> of <code>Y</code> to instances <code>x = f(y)</code> of <code>X</code> in polynomial time, with the property that the answer to <code>y</code> is yes, if and only if the answer to <code>f(y)</code> is yes.</p>
+<p>A problem is <b>NP-complete</b> if the problem is both</p>
+<ul>
+<li>NP-hard, and</li>
+<li>in NP</li>
+</ul>
+<p>and a nice explanation here : <a href="https://www.quora.com/What-are-P-NP-NP-complete-and-NP-hard">https://www.quora.com/What-are-P-NP-NP-complete-and-NP-hard</a></p>

@@ -1,0 +1,51 @@
+---
+layout: post
+title: Reading integer input from a text file in C
+date: 2015-07-18 04:00:50.000000000 +05:30
+type: post
+published: true
+status: publish
+categories: []
+tags: []
+meta:
+  _edit_last: '82754425'
+  geo_public: '0'
+  _publicize_job_id: '12836436459'
+author:
+  login: feroz29
+  email: f29ahmad@gmail.com
+  display_name: feroz29
+  first_name: ''
+  last_name: ''
+---
+<p>Many times you need to read from a text file in order to take input.</p>
+<p>So here is one of the way :</p>
+<p>I have used the function <a href="http://www.tutorialspoint.com/c_standard_library/c_function_fscanf.htm">fscanf()</a>.</p>
+<p>&nbsp;</p>
+<p>[code language="cpp"]<br />
+#include &lt;stdio.h&gt;<br />
+#include &lt;stdlib.h&gt;<br />
+int main()<br />
+{<br />
+	FILE *textfile=fopen(&quot;IntegerArray.txt&quot;,&quot;r&quot;);<br />
+	int arr[100050],i,lim,num;<br />
+	if (textfile == NULL)<br />
+    {<br />
+        printf(&quot;Error Reading File\n&quot;);<br />
+        exit (0);<br />
+    }<br />
+    i=0;<br />
+	while(fscanf(textfile, &quot;%d&quot;, &amp;num) &gt;0 )<br />
+	{<br />
+		arr[i++]=num;<br />
+	}<br />
+    lim=i;<br />
+    printf(&quot;\n Lim : %d \n&quot;,lim);</p>
+<p>    for (i = 0; i &lt; lim; i++)<br />
+    {<br />
+           printf(&quot;%d : %d\n&quot;,i, arr[i]);<br />
+    }<br />
+    fclose(textfile);<br />
+    return 0;</p>
+<p>}<br />
+[/code]</p>
