@@ -22,7 +22,8 @@ author:
 <p>There are many implementations of this sort available,  but in this article I have taken O(n2) implementation.</p>
 <p>It is a modified insertion sort such that we are maintaining of the "sorted part" of the insert sort algo, at discrete gaps rather than being contiguous as in normal insertion sort.</p>
 <p>Other modified versions : <a href="https://en.wikipedia.org/wiki/Shellsort#Gap_sequences">WIKI</a></p>
-<p>[code]<br />
+<p>
+{% highlight cpp %}
 #include &lt;stdio.h&gt;<br />
 #include &lt;stdlib.h&gt;<br />
 void shell_sort(int arr[], int n)<br />
@@ -53,4 +54,4 @@ void shell_sort(int arr[], int n)<br />
     }</p>
 <p>    return 0;<br />
 }</p>
-<p>[/code]</p>
+{% endhighlight %}
