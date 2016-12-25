@@ -8,16 +8,6 @@ image:
   feature: so-simple-sample-image-4.jpg
 categories: []
 tags: []
-meta:
-  _wp_page_template: default
-  _edit_last: '82754425'
-  geo_public: '0'
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
 ---
 
 I’m a simple guy who loves  tech, gadgets, games, physics and programming. Currently I m pursuing Bachelors in Technology (Computer Engineering) from Delhi Technological University.

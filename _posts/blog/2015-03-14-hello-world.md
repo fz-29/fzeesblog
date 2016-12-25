@@ -2,9 +2,9 @@
 layout: post
 title: "Hello World"
 modified:
-categories: blog
+categories: 
 excerpt:
-tags: []
+tags: [Hello World]
 image:
   feature:
 date: 2015-03-14 19:10:36.000000000 +05:30

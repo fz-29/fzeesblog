@@ -3,20 +3,13 @@ layout: post
 title: Inversion Count - SPOJ
 date: 2015-04-11 17:41:27.000000000 +05:30
 type: post
-published: true
-status: publish
-categories: algorithm
-tags:
-- INVCOUNT
-- INVERSION COUNT
-- INVERSION PAIRS
-- MERGE SORT
-- SOLUTION SPOJ
-- SPOJ INVCNT
-- SPOJ INVERSION COUNT
+categories: algorithms
+tags: [INVERSION COUNT, MERGE SORT, SPOJ INVCNT]
 ---
 
-In the Question <a href="http://www.spoj.com/problems/INVCNT/">Inversion Count</a> - INVCNT on spoj, you need to print the no. of inversion pairs. The question defines it as - "Let A[0...n - 1] be an array of n distinct positive integers. If i < j and A[i] >  A[j] then the pair (i, j) is called an inversion of A." So basically an inversion pair is the one in which if indices and the values have invert relation. ( if one is >  the other is < ).
+In the Question <a href="http://www.spoj.com/problems/INVCNT/">Inversion Count</a> - INVCNT on spoj, you need to print the no. of inversion pairs. The question defines it as - "Let A[0...n - 1] be an array of n distinct positive integers. If i < j and A[i] >  A[j] then the pair (i, j) is called an inversion of A".
+
+So basically an inversion pair is the one in which if indices and the values have invert relation. ( if one is >  the other is < ).
 
 The first basic approach which comes to mind is simple Brute Force algo. That is selecting one element(let it be i th) in the array and then checking all the elements ( j index for that matter) after the selected element for the condition Arr[i]> Arr[j], if such pair occurs then count++. But time complexity of this approach is O(n<sup>2</sup>).
 

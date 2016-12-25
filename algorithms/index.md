@@ -1,28 +1,12 @@
 ---
 layout: page
-title: About Me
-excerpt: "About me"
-modified: 2015-03-14 19:10:36.000000000 +05:30
-date: 2015-03-14 19:10:36.000000000 +05:30
-image:
-  feature: so-simple-sample-image-4.jpg
-categories: []
-tags: []
-meta:
-  _wp_page_template: default
-  _edit_last: '82754425'
-  geo_public: '0'
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
+title: Algorithms
+excerpt: "An archive of some good algorithm posts"
+search_omit: true
 ---
 
-I’m a simple guy who loves  tech, gadgets, games, physics and programming. Currently I m pursuing Bachelors in Technology (Computer Engineering) from Delhi Technological University.
-I love perfection and symmetry around me, not just love, I strive for it :P I wish to live life in much planned order(everyone does I guess), though its never. But I love the way it is( but most of the time I hate it due to uncertainities :P ). I always wish humans never had to sleep (may be a workaholic statement) as I enjoy my life doing what I do all the time.
-
-In my free time, I love to be with my friends for some outing or movies( though the movie part is rare).
-
-I believe teaching contributes a huge part to improving your own understanding thats why I am writing this blog to discuss and help people regarding questions on spoj. One can easily get solution(code) for the problems but most of the time, you have to understand logic from their code which is a bit cumbersome task of reverse engineering the code. So here is my blog to help people with the logics behind the code, my code may not be the best as there is always a scope of improvement. You can freely comment and help improve the solution.. Lets Code!! :)
+<ul class="post-list">
+{% for post in site.categories.algorithms %} 
+  <li><article><a href="{{ site.url }}{{ post.url }}">{{ post.title }} <span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.excerpt %} <span class="excerpt">{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</span>{% endif %}</a></article></li>
+{% endfor %}
+</ul>

@@ -1,8 +1,5 @@
 # Site navigation links
 
-- title: Home
-  url: /
-  
 - title: Algorithms
   url: /algorithms/
 
@@ -12,8 +9,8 @@
 - title: Machine Learning
   url: /ml/
 
-- title: Articles
-  url: /articles/
+- title: Tech
+  url: /tech/
 
 - title: About Me
   url: /about/
