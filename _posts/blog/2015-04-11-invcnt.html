@@ -15,16 +15,6 @@ tags:
 - SOLUTION SPOJ
 - SPOJ INVCNT
 - SPOJ INVERSION COUNT
-meta:
-  geo_public: '0'
-  _edit_last: '82754425'
-  _publicize_job_id: '12836552316'
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
 ---
 
 In the Question <a href="http://www.spoj.com/problems/INVCNT/">Inversion Count</a> - INVCNT on spoj, you need to print the no. of inversion pairs. The question defines it as - "Let A[0...n - 1] be an array of n distinct positive integers. If i < j and A[i] >  A[j] then the pair (i, j) is called an inversion of A." So basically an inversion pair is the one in which if indices and the values have invert relation. ( if one is >  the other is < ).
@@ -36,7 +26,7 @@ This can be understood using following :
 <a href="https://fzeesblog.files.wordpress.com/2015/04/img_20150411_231458239_hdr.jpg"><img class="alignnone size-medium wp-image-48" src="{{ site.baseurl }}/assets/img_20150411_231458239_hdr.jpg?w=262" alt="IMG_20150411_231458239_HDR" width="655px" height="750px" /></a>
 Here is the following pseudo-code :
 
-{% highlight cpp %}
+{% highlight cpp linenos %}
 
 #include <iostream> 
 typedef long long int typex;
@@ -89,7 +79,7 @@ int main()
    ////Write code accordingly
         count=0;
         mergesort(0,n-1);
-        cout<<&quot;\n&quot;<<count;
+        cout<<"\n"<<count;
 	////
 }
 {% endhighlight %}

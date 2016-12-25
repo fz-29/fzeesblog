@@ -1,135 +1,129 @@
 ---
 layout: post
-title: QUICK SORT
+title: "Quick Sort"
+modified:
+categories: algorithm
+excerpt:
+tags: [algorithm]
+image:
+  feature:
 date: 2015-04-20 05:46:36.000000000 +05:30
-type: post
-published: true
-status: publish
-categories:
-- Algorithms
-tags: []
-meta:
-  _publicize_pending: '1'
-  _rest_api_published: '1'
-  _rest_api_client_id: "-1"
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
+modified: 2015-04-20 05:46:36.000000000 +05:30
 ---
-<p>The basic outline of the Quick Sort function is to :</p>
-<p>1) Find a pivot, place it on correct position(let index be p) in the array(index : s to l ). This will be achieved by a partition function.</p>
-<p>2) Quick Sort the sub array (s to p-1).</p>
-<p>3) Quick Sort the sub array (p+1 to l).</p>
-<p>I have implemented the following code with 2 partition functions :</p>
-<p>1st based on <a href="http://en.wikipedia.org/wiki/Quicksort#Algorithm" target="_blank">Wikipedia's Algo</a></p>
-<p>2nd based on <a href="https://www.youtube.com/watch?v=3OLTJlwyIqQ" target="_blank">###</a></p>
-<p>[code]<br />
-#include &lt;iostream&gt;<br />
-#include &lt;time.h&gt;<br />
-using namespace std;<br />
-clock_t total_elapsed_time = 0;</p>
-<p>int partition(int *arr,int s,int l);</p>
-<p>void qsort(int *arr,int s,int l)<br />
-{<br />
-    int x=partition(arr,s,l);<br />
-    if(s&lt;x-1)<br />
-    qsort(arr, s, x-1);<br />
-    if(x+1&lt;l)<br />
-    qsort(arr,x+1,l);<br />
-}<br />
-int partition(int *arr,int s,int l)<br />
-{<br />
-    clock_t call_begin = clock();<br />
-    int pivot;<br />
-    int pval;<br />
-    int i,j,temp;</p>
-<p>    // ALGO 1 for partition function<br />
-    i=s;j=s;<br />
-    //i traverses over the array<br />
-    //j resides over the element &gt; arr[pivot]<br />
-        pval=arr[l];<br />
-        pivot=l;<br />
-    while(i&lt;l)<br />
-    {<br />
-        if(arr[i]&lt;pval)<br />
-        {<br />
-            temp=arr[i];<br />
-            arr[i]=arr[j];<br />
-            arr[j++]=temp;<br />
-        }<br />
-        i++;<br />
-    }<br />
-    temp=arr[l];<br />
-    arr[l]=arr[j];<br />
-    arr[j]=temp;<br />
-    total_elapsed_time+=(clock()-call_begin);<br />
-    return j;</p>
-<p>    //ALGO 2 for partition function.<br />
-    /*<br />
-    i=s;j=l;<br />
-    pivot=s;<br />
-    pval=arr[pivot];<br />
-    while(i&lt;j)<br />
-    {<br />
-        if(pivot==i)<br />
-        {<br />
-            //make comparision with value at j<br />
-            if(!(pval&lt;arr[j]))<br />
-            {<br />
-                //swap<br />
-                temp=arr[j];<br />
-                arr[j]=arr[i];<br />
-                arr[i]=temp;<br />
-                //pivot value has been shifted to arr[j]<br />
-                pivot=j;<br />
-                //now at ith position we have an element we just swapped with pivot, so move ahead at i<br />
-                i++;<br />
-            }<br />
-            else<br />
-                j--;<br />
-        }<br />
-        else<br />
-        {<br />
-            //this is for pivot==j<br />
-            if(!(pval&gt;arr[i]))<br />
-            {<br />
-                //swap<br />
-                temp=arr[j];<br />
-                arr[j]=arr[i];<br />
-                arr[i]=temp;<br />
-                //pivot value has been shifted to arr[i]<br />
-                pivot=i;<br />
-                //now at jth position we have an element we just swapped with pivot, so move ahead(left) at j<br />
-                j--;</p>
-<p>            }<br />
-            else<br />
-                i++;<br />
-        }</p>
-<p>    }</p>
-<p>    total_elapsed_time+=(clock()-call_begin);<br />
-    return i;<br />
-    */<br />
-}<br />
-int main()<br />
-{<br />
-    int i,arr[100],n,t;<br />
-    cin&gt;&gt;t;<br />
-    while(t--)<br />
-    {<br />
-        total_elapsed_time=0;<br />
-        cin&gt;&gt;n;<br />
-        for(i=0;i&lt;n;i++)<br />
-        {<br />
-            cin&gt;&gt;arr[i];<br />
-        }<br />
-        qsort(arr,0,n-1);<br />
-        for(i=0;i&lt;n;i++)<br />
-            cout&lt;&lt;arr[i]&lt;&lt;&quot;\t&quot;;<br />
-        cout&lt;&lt;&quot;\n\nTOTAL TIME ELAPSED in PARTITION FUNCTION : &quot;&lt;&lt;float(total_elapsed_time)/CLOCKS_PER_SEC;<br />
-    }</p>
-<p>    return 0;<br />
-}</p>
-<p>[/code]</p>
+The basic outline of the Quick Sort function is to :
+1) Find a pivot, place it on correct position(let index be p) in the array(index : s to l ). This will be achieved by a partition function.
+2) Quick Sort the sub array (s to p-1).
+3) Quick Sort the sub array (p+1 to l).
+I have implemented the following code with 2 partition functions :
+1st based on <a href="http://en.wikipedia.org/wiki/Quicksort#Algorithm" target="_blank">Wikipedia's Algo</a>
+2nd based on <a href="https://www.youtube.com/watch?v=3OLTJlwyIqQ" target="_blank">###</a>
+
+
+{% highlight cpp linenos %}
+#include <iostream>
+#include <time.h>
+using namespace std;
+clock_t total_elapsed_time = 0;
+int partition(int *arr,int s,int l);
+void qsort(int *arr,int s,int l)
+{
+    int x=partition(arr,s,l);
+    if(s<x-1)
+    qsort(arr, s, x-1);
+    if(x+1<l)
+    qsort(arr,x+1,l);
+}
+int partition(int *arr,int s,int l)
+{
+    clock_t call_begin = clock();
+    int pivot;
+    int pval;
+    int i,j,temp;
+    // ALGO 1 for partition function
+    i=s;j=s;
+    //i traverses over the array
+    //j resides over the element > arr[pivot]
+        pval=arr[l];
+        pivot=l;
+    while(i<l)
+    {
+        if(arr[i]<pval)
+        {
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j++]=temp;
+        }
+        i++;
+    }
+    temp=arr[l];
+    arr[l]=arr[j];
+    arr[j]=temp;
+    total_elapsed_time+=(clock()-call_begin);
+    return j;
+    //ALGO 2 for partition function.
+    /*
+    i=s;j=l;
+    pivot=s;
+    pval=arr[pivot];
+    while(i<j)
+    {
+        if(pivot==i)
+        {
+            //make comparision with value at j
+            if(!(pval<arr[j]))
+            {
+                //swap
+                temp=arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+                //pivot value has been shifted to arr[j]
+                pivot=j;
+                //now at ith position we have an element we just swapped with pivot, so move ahead at i
+                i++;
+            }
+            else
+                j--;
+        }
+        else
+        {
+            //this is for pivot==j
+            if(!(pval>arr[i]))
+            {
+                //swap
+                temp=arr[j];
+                arr[j]=arr[i];
+                arr[i]=temp;
+                //pivot value has been shifted to arr[i]
+                pivot=i;
+                //now at jth position we have an element we just swapped with pivot, so move ahead(left) at j
+                j--;
+            }
+            else
+                i++;
+        }
+    }
+    total_elapsed_time+=(clock()-call_begin);
+    return i;
+    */
+}
+int main()
+{
+    int i,arr[100],n,t;
+    cin>>t;
+    while(t--)
+    {
+        total_elapsed_time=0;
+        cin>>n;
+        for(i=0;i<n;i++)
+        {
+            cin>>arr[i];
+        }
+        qsort(arr,0,n-1);
+        for(i=0;i<n;i++)
+            cout<<arr[i]<<"\t";
+        cout<<"\n\nTOTAL TIME ELAPSED in PARTITION FUNCTION : "<<float(total_elapsed_time)/CLOCKS_PER_SEC;
+    }
+    return 0;
+}
+{% endhighlight %}
+

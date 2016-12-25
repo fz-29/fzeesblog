@@ -12,6 +12,7 @@ url: http://blog.ferozahmad.com
 
 permalink:   /:categories/:title/
 markdown:    kramdown
+#syntax heighlighting
 highlighter: rouge
 sass:
   sass_dir: _sass
@@ -62,6 +63,3 @@ owner:
 #comments
 layout: default
 comments: true
-
-#syntax heighlighting
-highlighter: true
