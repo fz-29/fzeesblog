@@ -1,27 +1,19 @@
 ---
 layout: post
 title: File IO Operations in C++
+categories: io
+excerpt:
+tags: [algorithm, IO, C++]
+image:
+  feature:
 date: 2015-08-20 18:53:51.000000000 +05:30
-type: post
-published: true
-status: publish
-categories: []
-tags: []
-meta:
-  _edit_last: '82754425'
-  geo_public: '0'
-  _publicize_job_id: '13925267264'
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
+modified: 2015-08-20 18:53:51.000000000 +05:30
 ---
 <p>Source : <a href="http://www.cplusplus.com/doc/tutorial/files/">http://www.cplusplus.com/doc/tutorial/files/</a></p>
 <hr />
-<p>I am just trying to keep the reading material organised for people and myself, I state that I do not own the following article).</p>
+<p>I am just trying to keep the reading material organised for people and myself.</p>
 <hr />
+
 <p>C++ provides the following classes to perform output and input of characters to/from files:</p>
 <ul>
 <li><b><code><a href="http://www.cplusplus.com/ofstream">ofstream</a></code>:</b> Stream class to write on files</li>
@@ -50,7 +42,7 @@ myfile.open (<kbd>"example.bin"</kbd>, ios::out | ios::app | ios::binary);
 <p>Combining step 1 and step 2,</p>
 <pre><code>ofstream myfile (<kbd>"example.bin"</kbd>, ios::out | ios::app | ios::binary);
 //Using the benefit of the contructor for the class ofstream</code></pre>
-<p>&nbsp;</p>
+
 <table style="height:389px;" width="822">
 <tbody>
 <tr>
@@ -83,7 +75,7 @@ myfile.open (<kbd>"example.bin"</kbd>, ios::out | ios::app | ios::binary);
 </tr>
 </tbody>
 </table>
-<p>&nbsp;</p>
+
 <p>For <code>ifstream</code> and <code>ofstream</code> classes, <code>ios::in</code> and <code>ios::out</code> are automatically and respectively assumed, even if a mode that does not include them is passed as second argument to the <code>open</code> member function (the flags are combined).</p>
 <p>For <code>fstream</code>, the default value is only applied if the function is called without specifying any value for the mode parameter. If the function is called with any value in that parameter the default mode (which is both input and output) is overridden, not combined.</p>
 <p>To check if a file stream was successful opening a file, you can do it by calling to member <code>is_open</code>. This member function returns a<code>bool</code> value of <code>true</code> in the case that indeed the stream object is associated with an open file, or <code>false</code> otherwise:</p>
@@ -92,25 +84,25 @@ myfile.open (<kbd>"example.bin"</kbd>, ios::out | ios::app | ios::binary);
 <p>3. Performing Operations</p>
 <p>Text Files</p>
 <pre><code><cite>// writing on a text file</cite>
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
+#include <iostream>
+#include <fstream>
 <var>using</var> <var>namespace</var> std;
 
 <var>int</var> main () {
   ofstream myfile (<kbd>"example.txt"</kbd>);
   <var>if</var> (myfile.is_open())
   {
-    myfile &lt;&lt; <kbd>"This is a line.\n"</kbd>;
-    myfile &lt;&lt; <kbd>"This is another line.\n"</kbd>;
+    myfile << <kbd>"This is a line.\n"</kbd>;
+    myfile << <kbd>"This is another line.\n"</kbd>;
     myfile.close();
   }
-  <var>else</var> cout &lt;&lt; <kbd>"Unable to open file"</kbd>;
+  <var>else</var> cout << <kbd>"Unable to open file"</kbd>;
   <var>return</var> 0;
 }</code></pre>
 <pre><code><cite>// reading a text file</cite>
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
-#include &lt;string&gt;
+#include <iostream>
+#include <fstream>
+#include <string>
 <var>using</var> <var>namespace</var> std;
 
 <var>int</var> main () {
@@ -120,17 +112,17 @@ myfile.open (<kbd>"example.bin"</kbd>, ios::out | ios::app | ios::binary);
   {
     <var>while</var> ( getline (myfile,line) )
     {
-      cout &lt;&lt; line &lt;&lt; <kbd>'\n'</kbd>;
+      cout << line << <kbd>'\n'</kbd>;
     }
     myfile.close();
   }
 
-  <var>else</var> cout &lt;&lt; <kbd>"Unable to open file"</kbd>; 
+  <var>else</var> cout << <kbd>"Unable to open file"</kbd>; 
 
   <var>return</var> 0;
 }</code></pre>
 <hr />
-<p>&nbsp;</p>
+
 <p>get and put stream objects:</p>
 <p><code>ifstream</code>, like <code>istream</code>, keeps an internal <i>get position</i> with the location of the element to be read in the next input operation.</p>
 <p><code>ofstream</code>, like <code>ostream</code>, keeps an internal <i>put position</i> with the location where the next element has to be written.</p>
@@ -140,14 +132,14 @@ myfile.open (<kbd>"example.bin"</kbd>, ios::out | ios::app | ios::binary);
 <p>no parameters return a value of the member type <code>streampos</code>,  the current <i>get position</i> (in the case of <code>tellg</code>) or the <i>put position</i> (in the case of <code>tellp</code>).</p>
 <h4>seekg() and seekp()</h4>
 <p>allow to change the location of the <i>get</i> and <i>put positions</i>. Both functions are overloaded with two different prototypes. The first form is:</p>
-<p><code>seekg ( position );<br />
-seekp ( position );<br />
-</code><br />
+<p><code>seekg ( position );
+seekp ( position );
+</code>
 Using this prototype, the stream pointer is changed to the absolute position <code>position</code> (counting from the beginning of the file). The type for this parameter is <code>streampos</code>, which is the same type as returned by functions <code>tellg</code> and <code>tellp</code>.</p>
 <p>The other form for these functions is:</p>
-<p><code>seekg ( offset, direction );<br />
-seekp ( offset, direction );<br />
-</code><br />
+<p><code>seekg ( offset, direction );
+seekp ( offset, direction );
+</code>
 Using this prototype, the <i>get</i> or <i>put position</i> is set to an offset value relative to some specific point determined by the parameter <code>direction</code>. <code>offset</code> is of type <code>streamoff</code>. And <code>direction</code> is of type <code>seekdir</code>, which is an <i>enumerated type</i> that determines the point from where offset is counted from, and that can take any of the following values:</p>
 <table class="boxed">
 <tbody>
@@ -169,14 +161,14 @@ Using this prototype, the <i>get</i> or <i>put position</i> is set to an offset 
 <hr />
 <p>&nbsp;</p>
 <p>Binary Files</p>
-<p>For binary files, reading and writing data with the extraction and insertion operators (<code>&lt;&lt;</code> and <code>&gt;&gt;</code>) and functions like <code>getline</code> is not efficient, since we do not need to format any data and data is likely not formatted in lines.</p>
+<p>For binary files, reading and writing data with the extraction and insertion operators (<code><<</code> and <code>>></code>) and functions like <code>getline</code> is not efficient, since we do not need to format any data and data is likely not formatted in lines.</p>
 <p>File streams include two member functions specifically designed to read and write binary data sequentially: <code>write</code> and <code>read</code>. The first one (<code>write</code>) is a member function of <code>ostream</code> (inherited by <code>ofstream</code>). And <code>read</code> is a member function of <code>istream</code> (inherited by<code>ifstream</code>). Objects of class <code>fstream</code> have both. Their prototypes are:</p>
-<p><tt>write ( memory_block, size );<br />
+<p><tt>write ( memory_block, size );
 read ( memory_block, size );</tt></p>
 <p>&nbsp;</p>
 <pre><code><cite>// obtaining file size</cite>
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
+#include <iostream>
+#include <fstream>
 <var>using</var> <var>namespace</var> std;
 
 <var>int</var> main () {
@@ -186,12 +178,12 @@ read ( memory_block, size );</tt></p>
   myfile.seekg (0, ios::end);
   end = myfile.tellg();
   myfile.close();
-  cout &lt;&lt; <kbd>"size is: "</kbd> &lt;&lt; (end-begin) &lt;&lt; <kbd>" bytes.\n"</kbd>;
+  cout << <kbd>"size is: "</kbd> << (end-begin) << <kbd>" bytes.\n"</kbd>;
   <var>return</var> 0;
 }</code></pre>
 <pre><code><cite>// reading an entire binary file</cite>
-#include &lt;iostream&gt;
-#include &lt;fstream&gt;
+#include <iostream>
+#include <fstream>
 <var>using</var> <var>namespace</var> std;
 
 <var>int</var> main () {
@@ -207,16 +199,14 @@ read ( memory_block, size );</tt></p>
     file.read (memblock, size);
     file.close();
 
-    cout &lt;&lt; <kbd>"the entire file content is in memory"</kbd>;
+    cout << <kbd>"the entire file content is in memory"</kbd>;
 
     <var>delete</var>[] memblock;
   }
-  <var>else</var> cout &lt;&lt; <kbd>"Unable to open file"</kbd>;
+  <var>else</var> cout << <kbd>"Unable to open file"</kbd>;
   <var>return</var> 0;
 }
 </code></pre>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <hr />
 <p>4. Closing a file</p>
 <p>Once this member function is called, the stream object can be re-used to open another file, and the file is available again to be opened by other processes.</p>

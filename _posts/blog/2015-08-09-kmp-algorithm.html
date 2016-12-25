@@ -1,158 +1,156 @@
 ---
+
 layout: post
-title: Knuth–Morris–Pratt (KMP) algorithm
-date: 2015-08-09 16:55:12.000000000 +05:30
-type: post
-published: true
-status: publish
-categories:
-- Algorithms
-tags:
-- KMP
-- Pattern Matching
-- String Matching
-meta:
-  _edit_last: '82754425'
-  geo_public: '0'
-  _publicize_job_id: '13560286314'
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
+title:  Knuth–Morris–Pratt (KMP) algorithm
+categories: algorithm
+excerpt:
+tags: [algorithm, string matching]
+image:
+  feature:
+date: 2015-07-18 04:00:50.000000000 +05:30
+modified: 2015-07-18 04:00:50.000000000 +05:30
+
 ---
-<p>KMP is a pattern matching algorithm which has very good running time.</p>
-<p>Firstly, what is the <strong>naive approach</strong> solution for pattern matching ? Answer to this question will lead to the key idea behind the KMP algo.</p>
-<p>How you go about matching a pattern with a text ? You might search  the first character of the pattern in the text, and after finding that you will try to match the other sequentially appearing characters in  the pattern till you match all or find a mismatch. Bravo, if you find a match but what if you didn't. You will go back to the point where your first character matched. And start the same procedure from the character next to the first match. This can be seen in the following example : <a href="https://fzeesblog.files.wordpress.com/2015/08/20150809_221842.jpg"><img class="alignright size-large wp-image-95" src="{{ site.baseurl }}/assets/20150809_221842.jpg?w=676" alt="Patterrn Matching Naive" width="676" height="870" /></a></p>
-<p>There is an annoying step which we perform if we find a mismatch, that is going BACK to the first character of match. The KMP algo improves the worst time complexity significantly just by eliminating this step of going backwards. Obviously, no one likes to step backwards :P</p>
-<p>Key Concept of KMP algo :</p>
-<p>The KMP matching algorithm uses degenerating property - pattern having same subpatterns appearing more than once in the pattern. The algorithm first creates an integer array of size same as that of the pattern and stores some useful information after computing on the text, which it then uses while matching the pattern with the text.</p>
-<p>KMP algorithm does some preprocessing over the pattern pat[] and constructs an auxiliary array lps[] of size same as size of pattern (=m). <strong>lps = longest proper prefix which is also suffix.</strong> For each sub-pattern pat[0…i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].</p>
-<p>For Example :</p>
-<p>Let Pattern be FFZFFZFFF :</p>
-<p>for i=0 : "F" - Proper prefix = "" and</p>
-<p>Proper Suffix = ""                                        lps[0]=0</p>
-<p>for i=1 : "FF" - Proper prefix = "F" and</p>
-<p>Proper Suffix = "F"</p>
-<p>Longest common prefix which is also a suffix = "F" ie length  1, thus lps[1]=1</p>
-<p>for i=2: "FFZ" - Proper prefix = "F","FF" and</p>
-<p>Proper Suffix = "Z","FZ"                                      thus lps[2]=0</p>
-<p>for i=3: "FFZF" - Proper prefix = "F","FF","FFZ" and</p>
-<p>Proper Suffix = "F","ZF", "FZF"                                      thus lps[3]=1</p>
-<p>for i=4: "FFZFF" - Proper prefix = "F","FF","FFZ","FFZF" and</p>
-<p>Proper Suffix = "F","FF"ZFF", "FZFF"                                      thus lps[3]=2 (as longest common is "FF")</p>
-<p>for i=5: "FFZFFZ" - Proper prefix = "F","FF","FFZ","FFZF","FFZFF" and</p>
-<p>Proper Suffix = "Z","FZ"FFZ", "ZFFZ","FZFFZ"                                      thus lps[4]=3 (as longest common is "FFZ")</p>
-<p>Similarly lps[i] can be carried out for  whole pattern.</p>
-<p>Now this lps[] array is used while matching patterns.</p>
-<p>**********</p>
-<p>[code]<br />
-Pseudocode Code for Function to create lps array<br />
-Function    create_lps( pat,  size) :<br />
-    lps[0]=0<br />
-    INITIALIZE i=1 and j=0<br />
-    WHILE i &lt; PATTERN.LENGTH:</p>
-<p>        if PATTERN at i == PATTERN at j :<br />
-            lps[i]=j+1<br />
-            i++ and j++ //MOVE i and j ahead</p>
-<p>        else //MISMATCH<br />
-            if j &gt; 0:<br />
-                j=lps[j-1];<br />
-            else //when j stands at 0<br />
-                //NO PART OF PATTERN till i, HAS LPS<br />
-                lps[i]=0<br />
-                i++</p>
-<p>Pseudocode Code for Function to check pattern<br />
-Function KMP_chk():<br />
-	WHILE i &lt; TEXT.LENGTH :<br />
-		if TEXT at i == PATTERN at j :<br />
-			i++ and j++<br />
-		else<br />
-			if mismatch occurs at j&gt;0<br />
-				j=lps[j-1];		//THIS IS THE STEP WHICH AVOIDS GOING BACK TO<br />
-			else<br />
-                                i++;</p>
-<p>		if j== PATTERN.LENGTH	//THAT MEANS TEXT at i == PATTERN at j executed j times only because it matches the pattern<br />
-			//PATTERN MATCH FOUND, STORE AND FIND MORE OCCURANCES.</p>
-<p>[/code]</p>
-<p>Here is the C++ implementation code</p>
-<p>[code language="cpp"]<br />
-#include &lt;iostream&gt;<br />
-using namespace std;<br />
-int lens(char *s)<br />
-{<br />
-    int i;<br />
-    for(i=0;s[i]!=0;i++);<br />
-    return i;<br />
-}<br />
-void createlps(char *pat, int *lps, int size)<br />
-{<br />
-    int i,j;<br />
-    lps[0]=0;<br />
-    i=1;j=0;<br />
-    while(i&lt;size)<br />
-    {<br />
-        if(pat[i]==pat[j])<br />
-        {<br />
-            lps[i]=j+1;<br />
-            i++;j++;<br />
-        }<br />
-        else<br />
-        {<br />
-            if(j&gt;0)<br />
-            	j=lps[j-1];<br />
-            else<br />
-            {<br />
-	        lps[i]=0;<br />
-                i++;<br />
-            }<br />
-        }<br />
-    }<br />
-}</p>
-<p>void checkoccurances(char *text, char *pat, int *lps, int sizep, int *occurances)<br />
-{<br />
-    int i,j,k;<br />
-    i=0;k=0;j=0;<br />
-    while(text[i]!=0)<br />
-    {<br />
-        if(pat[j]==text[i])<br />
-        {<br />
-            i++;<br />
-            j++;<br />
-        }<br />
-        else<br />
-        {<br />
-                if(j&gt;0)<br />
-                    j=lps[i-1];<br />
-                else<br />
-                    i++;<br />
-        }<br />
-        if(j==sizep)<br />
-        {<br />
-            occurances[k++]=i-sizep;<br />
-            j=0;<br />
-        }<br />
-    }<br />
-    occurances[k]=-1;<br />
-}</p>
-<p>int main() {<br />
-    char text[5000],pat[50];<br />
-    int i,occurances[50];</p>
-<p>    cout&lt;&lt;&quot;Enter the text : &quot;;<br />
-    cin&gt;&gt;text;<br />
-    cout&lt;&lt;&quot;Enter the pattern : &quot;;<br />
-    cin&gt;&gt;pat;</p>
-<p>    int patlen=lens(pat);<br />
-    int *lps= new int [patlen];<br />
-    createlps(pat,lps,patlen);<br />
-    checkoccurances(text,pat,lps,patlen,occurances);</p>
-<p>	cout&lt;&lt;&quot;\n \nOccurances are at indices :&quot;;<br />
-    for(i=0;occurances[i]!=-1;i++)<br />
-    	cout&lt;&lt;occurances[i]&lt;&lt;&quot;   &quot;;<br />
-cin.ignore();<br />
-    cin.get();<br />
-    return 0;<br />
-}<br />
-[/code]</p>
-<p>Note the similarity in the code of createlps() and checkoccurances()</p>
+KMP is a pattern matching algorithm which has very good running time.
+Firstly, what is the <strong>naive approach</strong> solution for pattern matching ? Answer to this question will lead to the key idea behind the KMP algo.
+
+How would you go about matching a pattern with a text ? You might search  the first character of the pattern in the text, and after finding that you will try to match the other sequentially appearing characters in  the pattern till you match all or find a mismatch. Bravo, if you find a match but what if you didn't. You will go back to the point where your first character matched. And start the same procedure from the character next to the first match. This can be seen in the following example : <a href="https://fzeesblog.files.wordpress.com/2015/08/20150809_221842.jpg"><img class="alignright size-large wp-image-95" src="{{ site.baseurl }}/assets/20150809_221842.jpg?w=676" alt="Patterrn Matching Naive" width="676" height="870" /></a>
+
+There is an annoying step which we perform if we find a mismatch, that is going BACK to the first character of match. The KMP algo improves the worst time complexity significantly just by eliminating this step of going backwards. Obviously, no one likes to step backwards :P
+Key Concept of KMP algo :
+The KMP matching algorithm uses degenerating property - pattern having same subpatterns appearing more than once in the pattern. The algorithm first creates an integer array of size same as that of the pattern and stores some useful information after computing on the text, which it then uses while matching the pattern with the text.
+
+KMP algorithm does some preprocessing over the pattern pat[] and constructs an auxiliary array lps[] of size same as size of pattern (=m). <strong>lps = longest proper prefix which is also suffix.</strong> For each sub-pattern pat[0…i] where i = 0 to m-1, lps[i] stores length of the maximum matching proper prefix which is also a suffix of the sub-pattern pat[0..i].
+
+For Example :
+Let Pattern be FFZFFZFFF :
+for i=0 : "F" - Proper prefix = "" and
+Proper Suffix = ""                                        lps[0]=0
+for i=1 : "FF" - Proper prefix = "F" and
+Proper Suffix = "F"
+Longest common prefix which is also a suffix = "F" ie length  1, thus lps[1]=1
+for i=2: "FFZ" - Proper prefix = "F","FF" and
+Proper Suffix = "Z","FZ"                                      thus lps[2]=0
+for i=3: "FFZF" - Proper prefix = "F","FF","FFZ" and
+Proper Suffix = "F","ZF", "FZF"                                      thus lps[3]=1
+for i=4: "FFZFF" - Proper prefix = "F","FF","FFZ","FFZF" and
+Proper Suffix = "F","FF"ZFF", "FZFF"                                      thus lps[3]=2 (as longest common is "FF")
+for i=5: "FFZFFZ" - Proper prefix = "F","FF","FFZ","FFZF","FFZFF" and
+Proper Suffix = "Z","FZ"FFZ", "ZFFZ","FZFFZ"                                      thus lps[4]=3 (as longest common is "FFZ")
+Similarly lps[i] can be carried out for  whole pattern.
+Now this lps[] array is used while matching patterns.
+
+
+{% highlight py %}
+Pseudocode Code for Function to create lps array
+Function    create_lps( pat,  size) :
+    lps[0]=0
+    INITIALIZE i=1 and j=0
+    WHILE i < PATTERN.LENGTH:
+        if PATTERN at i == PATTERN at j :
+            lps[i]=j+1
+            i++ and j++ //MOVE i and j ahead
+        else //MISMATCH
+            if j > 0:
+                j=lps[j-1];
+            else //when j stands at 0
+                //NO PART OF PATTERN till i, HAS LPS
+                lps[i]=0
+                i++
+{% endhighlight %}
+
+{% highlight py %}
+Pseudocode Code for Function to check pattern
+Function KMP_chk():
+	WHILE i < TEXT.LENGTH :
+		if TEXT at i == PATTERN at j :
+			i++ and j++
+		else
+			if mismatch occurs at j>0
+				j=lps[j-1];		//THIS IS THE STEP WHICH AVOIDS GOING BACK TO
+			else
+                                i++;
+		if j== PATTERN.LENGTH	//THAT MEANS TEXT at i == PATTERN at j executed j times only because it matches the pattern
+			//PATTERN MATCH FOUND, STORE AND FIND MORE OCCURANCES.
+{% endhighlight %}
+
+Here is the C++ implementation code
+{% highlight cpp linenos %}
+#include <iostream>
+using namespace std;
+int lens(char *s)
+{
+    int i;
+    for(i=0;s[i]!=0;i++);
+    return i;
+}
+void createlps(char *pat, int *lps, int size)
+{
+    int i,j;
+    lps[0]=0;
+    i=1;j=0;
+    while(i<size)
+    {
+        if(pat[i]==pat[j])
+        {
+            lps[i]=j+1;
+            i++;j++;
+        }
+        else
+        {
+            if(j>0)
+            	j=lps[j-1];
+            else
+            {
+	        lps[i]=0;
+                i++;
+            }
+        }
+    }
+}
+void checkoccurances(char *text, char *pat, int *lps, int sizep, int *occurances)
+{
+    int i,j,k;
+    i=0;k=0;j=0;
+    while(text[i]!=0)
+    {
+        if(pat[j]==text[i])
+        {
+            i++;
+            j++;
+        }
+        else
+        {
+                if(j>0)
+                    j=lps[i-1];
+                else
+                    i++;
+        }
+        if(j==sizep)
+        {
+            occurances[k++]=i-sizep;
+            j=0;
+        }
+    }
+    occurances[k]=-1;
+}
+int main() {
+    char text[5000],pat[50];
+    int i,occurances[50];
+    cout<<"Enter the text : ";
+    cin>>text;
+    cout<<"Enter the pattern : ";
+    cin>>pat;
+    int patlen=lens(pat);
+    int *lps= new int [patlen];
+    createlps(pat,lps,patlen);
+    checkoccurances(text,pat,lps,patlen,occurances);
+	cout<<"\n \nOccurances are at indices :";
+    for(i=0;occurances[i]!=-1;i++)
+    	cout<<occurances[i]<<"   ";
+cin.ignore();
+    cin.get();
+    return 0;
+}
+{% endhighlight %}
+Note the similarity in the code of createlps() and checkoccurances()

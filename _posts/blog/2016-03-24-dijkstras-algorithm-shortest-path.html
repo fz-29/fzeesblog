@@ -1,65 +1,62 @@
 ---
 layout: post
 title: Dijkstra's Algorithm - Shortest Path
+categories: algorithm
+excerpt:
+tags: [algorithm, graph, SHPATH]
+image:
+  feature:
 date: 2016-03-24 14:59:33.000000000 +05:30
-type: post
-published: true
-status: publish
-categories:
-- Algorithms
-tags: []
-meta:
-  _edit_last: '82754425'
-  geo_public: '0'
-  _publicize_job_id: '21087248057'
-author:
-  login: feroz29
-  email: f29ahmad@gmail.com
-  display_name: feroz29
-  first_name: ''
-  last_name: ''
+modified: 2016-03-24 14:59:33.000000000 +05:30
 ---
-<p>Concept of Set can be understood by following code :</p>
-<p>[code language="cpp"]</p>
-<p>#include &lt;iostream&gt;<br />
-#include&lt;set&gt;<br />
-using namespace std;<br />
-int main() {<br />
-// your code goes here<br />
-set &lt;pair&lt;int,int&gt;&gt; S;<br />
-set &lt;pair&lt;int,int&gt;&gt; :: iterator it;<br />
-S.insert({2,100});<br />
-S.insert({1,200});<br />
-S.insert({1,50});<br />
-for(it = S.begin();it!=S.end();it++)<br />
-{<br />
-cout&lt;&lt;(*it).first&lt;&lt;&quot; &quot;&lt;&lt;(*it).second&lt;&lt;endl;</p>
-<p>}<br />
-return 0;<br />
-}</p>
-<p>[/code]</p>
-<p>Output:<br />
-1 50<br />
-1 200<br />
-2 100</p>
-<p>This property of set can be easily utilized, that set keeps all its elements in kind of sorted order. (using Red-Black Trees)</p>
-<p>Check out the code for <a href="http://www.spoj.com/problems/SHPATH/">SPOJ - SHPATH</a> at : <a href="http://ideone.com/Ip8Kzf">http://ideone.com/Ip8Kzf</a></p>
-<p>Psuedocode  from CLRS :</p>
-<p>[code language="python"]<br />
-function Dijkstra(Graph, source):<br />
-     create vertex set Q<br />
-     for each vertex v in Graph:             // Initialization<br />
-         dist[v] ← INFINITY                  // Unknown distance from source to v<br />
-         prev[v] ← UNDEFINED                 // Previous node in optimal path from source<br />
-         add v to Q                          // All nodes initially in Q (unvisited nodes)<br />
-     dist[source] ← 0                        // Distance from source to source</p>
-<p>     while Q is not empty:<br />
-         u ← vertex in Q with min dist[u]    // Source node will be selected first<br />
-         remove u from Q </p>
-<p>         for each neighbor v of u:           // where v is still in Q.<br />
-             alt ← dist[u] + length(u, v)<br />
-             if alt &lt; dist[v]:               // A shorter path to v has been found<br />
-                 dist[v] ← alt<br />
-                 prev[v] ← u<br />
-     return dist[], prev[]<br />
-[/code]</p>
+
+Concept of Set can be understood by following code :
+
+{% highlight cpp linenos %}
+
+#include <iostream>
+#include<set>
+using namespace std;
+int main() {
+// your code goes here
+set <pair<int,int>> S;
+set <pair<int,int>> :: iterator it;
+S.insert({2,100});
+S.insert({1,200});
+S.insert({1,50});
+for(it = S.begin();it!=S.end();it++)
+{
+cout<<(*it).first<<" "<<(*it).second<<endl;
+}
+return 0;
+}
+{% endhighlight %}
+
+Output:
+1 50
+1 200
+2 100
+
+This property of set can be easily utilized, that set keeps all its elements in kind of sorted order. (using Red-Black Trees)
+
+Psuedocode  from CLRS :
+{% highlight py linenos %}
+function Dijkstra(Graph, source):
+     create vertex set Q
+     for each vertex v in Graph:             // Initialization
+         dist[v] ← INFINITY                  // Unknown distance from source to v
+         prev[v] ← UNDEFINED                 // Previous node in optimal path from source
+         add v to Q                          // All nodes initially in Q (unvisited nodes)
+     dist[source] ← 0                        // Distance from source to source
+     while Q is not empty:
+         u ← vertex in Q with min dist[u]    // Source node will be selected first
+         remove u from Q 
+         for each neighbor v of u:           // where v is still in Q.
+             alt ← dist[u] + length(u, v)
+             if alt < dist[v]:               // A shorter path to v has been found
+                 dist[v] ← alt
+                 prev[v] ← u
+     return dist[], prev[]
+{% endhighlight %}
+
+Check out the code for <a href="http://www.spoj.com/problems/SHPATH/">SPOJ - SHPATH</a> at : <a href="http://ideone.com/Ip8Kzf">http://ideone.com/Ip8Kzf</a>
