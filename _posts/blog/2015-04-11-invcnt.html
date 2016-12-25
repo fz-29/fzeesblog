@@ -17,7 +17,9 @@ tags:
 ---
 
 In the Question <a href="http://www.spoj.com/problems/INVCNT/">Inversion Count</a> - INVCNT on spoj, you need to print the no. of inversion pairs. The question defines it as - "Let A[0...n - 1] be an array of n distinct positive integers. If i < j and A[i] >  A[j] then the pair (i, j) is called an inversion of A." So basically an inversion pair is the one in which if indices and the values have invert relation. ( if one is >  the other is < ).
+
 The first basic approach which comes to mind is simple Brute Force algo. That is selecting one element(let it be i th) in the array and then checking all the elements ( j index for that matter) after the selected element for the condition Arr[i]> Arr[j], if such pair occurs then count++. But time complexity of this approach is O(n<sup>2</sup>).
+
 But submitting this solution will lead to TLE (time limit exceeded).
 So we need to use some other algo, and the solution uses Merge Function in Merge Sort Algorithm.
 Actually when we merge the two sorted array, while comparing elements we can perform the counting of inversion pairs. This can be done as : (for ascending order sorting) When the current element under consideration in right sub-array is smaller than current element under consideration in left sub-array the no of inversion pairs equals to the no. of all the elements after the current element in left sub-array (including itself), in each level of merge sort. Sum of all these pairs will be equal to inversion pairs.
