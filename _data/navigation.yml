@@ -1,16 +1,22 @@
 # Site navigation links
 
-- title: About
-  url: /about/
+- title: Home
+  url: /
+  
+- title: Algorithms
+  url: /algorithms/
+
+- title: Programming
+  url: /programming/
+
+- title: Machine Learning
+  url: /ml/
 
 - title: Articles
   url: /articles/
 
-- title: Blog
-  url: /blog/
-
-- title: Theme Setup
-  url: /theme-setup/
+- title: About Me
+  url: /about/
 
 - title: Search
   url: /search/
