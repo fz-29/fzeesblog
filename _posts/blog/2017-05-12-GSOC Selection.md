@@ -6,7 +6,7 @@ excerpt:
 tags: [Wikimedia, GSOC]
 image:
   feature:
-date: 2017-04-13 03:00:00 +05:30
+date: 2017-05-13 03:00:00 +05:30
 share: true
 ---
 
