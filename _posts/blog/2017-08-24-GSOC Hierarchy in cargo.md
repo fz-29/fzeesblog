@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "GSoC 2017 - Add "Hierarchy" in Cargo Extension"
+title: "GSoC 2017 - Add 'Hierarchy' in Cargo Extension"
 categories: foss
 excerpt:
 tags: [Wikimedia, GSOC]
